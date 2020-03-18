@@ -1,0 +1,67 @@
+# Routes Config
+#
+# This file defines all application routes (Higher priority routes first)
+#
+
+module:testrunner
+# module:jobs
+
+
+GET     /                                            App.Index
+GET     /login                                        App.Login
+#GET     /login                                        App.SetCook
+
+
+DELETE  /delete                                      CUser.KillSession
+PUT      /user                                   CUser.GetUser
+
+
+GET      /project                                CProject.GetAll
+#GET      /projectt                               CProject.GetId
+PUT       /project                                CProject.Add
+DELETE   /project:/idproject                     CProject.Delete
+POST     /project:/idproject                     CProject.Edit
+
+
+GET      /type                                     CType.GetAll
+
+
+GET      /group                                   CGroup.GetAll
+PUT      /group                                   CGroup.Add
+DELETE   /group:/idgroup                          CGroup.Delete
+POST     /group:/idgroup                         CGroup.Edit
+
+
+
+
+
+GET      /tasks/:tasks                            CTask.GetAll
+#GET      /project:/idproject:/task:/idtask       CTask.GetId
+PUT       /project:/idproject:/task               CTask.Add
+DELETE    /project:/idproject:/task:/idtask       CTask.Delete
+POST      /task/:idtask                           CTask.Edit
+
+
+
+GET      /group/:persons                          CPerson.GetAll
+#GET      /group:/idgroup:/person:/idperson       CPerson.GetId
+PUT       /person                                 CPerson.Add
+DELETE    /group/:person                        CPerson.Delete
+POST     /group:/idgroup:/person:/idperson       CPerson.Edit
+
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/*filepath                       Static.Serve("public")
+
+# Catch all, this will route any request into the controller path
+#
+#                    **** WARNING ****
+# Enabling this exposes any controller and function to the web.
+# ** This is a serious security issue if used online **
+#
+# For rapid development uncomment the following to add new controller.action endpoints
+# without having to add them to the routes table.
+# *       /:controller/:action                    :controller.:action
